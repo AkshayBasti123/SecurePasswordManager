@@ -1,28 +1,75 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>Secure Password Manager</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
 </head>
 <body>
+  <div class="bg-orb"></div>
+  <div class="bg-orb orb2"></div>
+
   <div class="container">
     <div class="card" id="authCard">
-      <h1>🔐 Secure Password Manager</h1>
-      <input type="text" id="user" placeholder="Username">
-      <input type="password" id="pass" placeholder="Password">
-      <button onclick="register()">Register</button>
-      <button onclick="login()">Login</button>
-      <p id="message"></p>
+      <h1 class="title">🔐 Secure Password Manager</h1>
+      <p class="subtitle">Strong security • Smooth UX</p>
+
+      <div class="tabs">
+        <button class="tab active" id="loginTab" onclick="showTab('login')">Login</button>
+        <button class="tab" id="registerTab" onclick="showTab('register')">Register</button>
+      </div>
+
+      <div id="loginForm" class="form">
+        <input id="loginUser" placeholder="Username" />
+        <input id="loginPass" type="password" placeholder="Password" />
+        <button onclick="login()">Login</button>
+        <p id="authMsg" class="msg"></p>
+      </div>
+
+      <div id="registerForm" class="form hidden">
+        <input id="regUser" placeholder="Username" />
+        <input id="regPass" type="password" placeholder="Password" oninput="updateStrength('regPass','strengthBar')" />
+        <div class="strength"><div id="strengthBar"></div></div>
+        <button onclick="registerUser()">Create Account</button>
+        <p id="regMsg" class="msg"></p>
+      </div>
     </div>
 
+    <!-- Vault Card -->
     <div class="card hidden" id="vaultCard">
-      <h2>Welcome <span id="welcomeUser"></span></h2>
-      <input type="text" id="entry" placeholder="Password to save">
-      <button onclick="savePassword()">Save</button>
-      <ul id="vaultList"></ul>
+      <div class="vaultHeader">
+        <div>
+          <h2>Welcome, <span id="welcomeUser"></span> 👋</h2>
+          <p class="subtitle">Your encrypted entries</p>
+        </div>
+        <div class="actions">
+          <button class="ghost" onclick="toggleTheme()">🌓</button>
+          <button class="danger" onclick="logout()">Logout</button>
+        </div>
+      </div>
+
+      <div class="toolbar">
+        <input id="search" placeholder="Search site/account..." oninput="renderVault()" />
+        <div class="pwgen">
+          <input id="genLen" type="number" min="8" max="64" value="16" />
+          <button onclick="generatePassword()">Generate 🔁</button>
+          <input id="genOut" placeholder="Generated password" readonly />
+          <button onclick="copyText('genOut')">Copy</button>
+        </div>
+      </div>
+
+      <div class="form row">
+        <input id="site" placeholder="Site (e.g. github.com)" />
+        <input id="account" placeholder="Account (email/username)" />
+        <input id="secret" placeholder="Password/Secret" />
+        <button onclick="addEntry()">Add</button>
+      </div>
+
+      <ul id="vaultList" class="list"></ul>
     </div>
   </div>
+
   <script src="app.js"></script>
 </body>
 </html>
