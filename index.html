@@ -1,10 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html>
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="utf-8" />
   <title>Secure Password Manager</title>
-  <link rel="stylesheet" href="style.css" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <div class="bg-orb"></div>
@@ -13,7 +13,7 @@
   <div class="container">
     <div class="card" id="authCard">
       <h1 class="title">🔐 Secure Password Manager</h1>
-      <p class="subtitle">Strong security • Smooth UX</p>
+      <p class="subtitle">Strong fundamentals • Clean UI</p>
 
       <div class="tabs">
         <button class="tab active" id="loginTab" onclick="showTab('login')">Login</button>
@@ -29,14 +29,13 @@
 
       <div id="registerForm" class="form hidden">
         <input id="regUser" placeholder="Username" />
-        <input id="regPass" type="password" placeholder="Password" oninput="updateStrength('regPass','strengthBar')" />
+        <input id="regPass" type="password" placeholder="Password (6+ chars)" oninput="updateStrength('regPass','strengthBar')" />
         <div class="strength"><div id="strengthBar"></div></div>
         <button onclick="registerUser()">Create Account</button>
         <p id="regMsg" class="msg"></p>
       </div>
     </div>
 
-    <!-- Vault Card -->
     <div class="card hidden" id="vaultCard">
       <div class="vaultHeader">
         <div>
@@ -53,7 +52,7 @@
         <input id="search" placeholder="Search site/account..." oninput="renderVault()" />
         <div class="pwgen">
           <input id="genLen" type="number" min="8" max="64" value="16" />
-          <button onclick="generatePassword()">Generate 🔁</button>
+          <button onclick="generatePassword()">Generate</button>
           <input id="genOut" placeholder="Generated password" readonly />
           <button onclick="copyText('genOut')">Copy</button>
         </div>
